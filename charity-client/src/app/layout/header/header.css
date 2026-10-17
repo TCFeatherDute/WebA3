@@ -1,0 +1,43 @@
+.site-header {
+  background-color: #162338;
+  color: white;
+  padding: 24px 32px;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.brand-icon {
+  font-size: 32px;
+  color: #a9d3be;
+}
+
+.brand-text h1 {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.brand-text p {
+  font-size: 13px;
+  color: #bdc9d5;
+  margin: 4px 0 0;
+}
+
+@media (max-width: 640px) {
+  .site-header {
+    padding: 18px 16px;
+  }
+
+  .brand-text h1 {
+    font-size: 20px;
+  }
+}
