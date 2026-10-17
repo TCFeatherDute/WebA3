@@ -1,0 +1,44 @@
+.site-navbar {
+  background-color: #253750;
+  border-bottom: 1px solid #334155;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 24px;
+}
+
+.nav-container a {
+  display: inline-block;
+  padding: 14px 20px;
+  color: #d8e2ed;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.nav-container a:hover {
+  background-color: #334861;
+  color: white;
+}
+
+.nav-container a.active {
+  background-color: #a9d3be;
+  color: #162338;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .nav-container {
+    padding: 0 8px;
+  }
+
+  .nav-container a {
+    padding: 12px;
+    font-size: 13px;
+  }
+}

@@ -1,1 +1,12 @@
-<p>navbar works!</p>
+<nav class="site-navbar" aria-label="Main navigation">
+  <div class="nav-container">
+    <a routerLink="/" routerLinkActive="active"
+       [routerLinkActiveOptions]="{ exact: true }">
+      Home
+    </a>
+
+    <a routerLink="/search" routerLinkActive="active">
+      Search Events
+    </a>
+  </div>
+</nav>
