@@ -44,7 +44,8 @@
   align-items: start;
 }
 
-.detail-main {
+.detail-main,
+.detail-sidebar {
   display: grid;
   gap: 24px;
 }
@@ -153,6 +154,31 @@
 
 .register-button:hover {
   background: #39694a;
+}
+
+.weather-description {
+  margin-bottom: 16px;
+  color: #397a50;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.weather-temperatures {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.weather-temperatures strong {
+  color: #254a35;
+  font-size: 28px;
+}
+
+.weather-temperatures span {
+  color: #748176;
+  font-size: 13px;
 }
 
 .state-message {

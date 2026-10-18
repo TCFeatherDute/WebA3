@@ -1,0 +1,110 @@
+
+<section class="registration-page">
+  <a [routerLink]="['/events', eventId]" class="back-link">
+    &larr; Back to Event Details
+  </a>
+
+  @if (loading()) {
+    <div class="state-message">Loading registration form...</div>
+  } @else if (!event()) {
+    <div class="state-message error-message">{{ error() }}</div>
+  } @else if (event(); as current) {
+    <div class="page-heading">
+      <span class="eyebrow">JOIN AN EVENT</span>
+      <h1>Event Registration</h1>
+      <p>Complete the form below to register for this charity event.</p>
+    </div>
+
+    <div class="registration-layout">
+      <div class="form-card">
+        @if (success()) {
+          <div class="success-panel" role="status">
+            <h2>Registration Successful!</h2>
+            <p>{{ success() }}</p>
+            <p>Registration ID: <strong>#{{ registrationId() }}</strong></p>
+            <a [routerLink]="['/events', eventId]">
+              Return to Event Details &rarr;
+            </a>
+          </div>
+        } @else if (current.status !== 'Active') {
+          <div class="state-message">
+            Registration is not available for this event.
+          </div>
+        } @else {
+          <h2>Attendee Information</h2>
+
+          <form #registrationForm="ngForm"
+                (ngSubmit)="submitRegistration()">
+
+            <div class="field">
+              <label for="fullName">Full Name *</label>
+              <input id="fullName" type="text"
+                     name="fullName"
+                     [(ngModel)]="fullName"
+                     required
+                     placeholder="Your full name">
+            </div>
+
+            <div class="field">
+              <label for="email">Email Address *</label>
+              <input id="email" type="email"
+                     name="email"
+                     [(ngModel)]="email"
+                     required email
+                     placeholder="name@example.com">
+            </div>
+
+            <div class="field">
+              <label for="phone">Phone Number *</label>
+              <input id="phone" type="tel"
+                     name="phone"
+                     [(ngModel)]="phone"
+                     required
+                     placeholder="Your contact number">
+            </div>
+
+            <div class="field">
+              <label for="tickets">Number of Tickets *</label>
+              <input id="tickets" type="number"
+                     name="tickets"
+                     [(ngModel)]="tickets"
+                     required min="1" step="1">
+            </div>
+
+            @if (error()) {
+              <p class="form-error" role="alert">{{ error() }}</p>
+            }
+
+            <button type="submit"
+                    class="submit-button"
+                    [disabled]="registrationForm.invalid || submitting()">
+              {{ submitting() ? 'Submitting...' : 'Confirm Registration' }}
+            </button>
+          </form>
+        }
+      </div>
+
+      <aside class="summary-card">
+        <h2>Event Summary</h2>
+        <h3>{{ current.name }}</h3>
+        <p>{{ current.event_date | date:'longDate' }}</p>
+        <p>{{ current.location }}</p>
+
+        <div class="summary-row">
+          <span>Ticket Price</span>
+          <strong>{{ current.ticket_price | currency:'AUD' }}</strong>
+        </div>
+
+        <div class="summary-row">
+          <span>Tickets</span>
+          <strong>{{ tickets }}</strong>
+        </div>
+
+        <div class="summary-row total-row">
+          <span>Total</span>
+          <strong>{{ totalPrice | currency:'AUD' }}</strong>
+        </div>
+      </aside>
+    </div>
+  }
+</section>

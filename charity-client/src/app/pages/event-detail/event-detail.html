@@ -5,25 +5,33 @@
   </a>
 
   @if (loading()) {
-    <div class="state-message">Loading event details...</div>
+    <div class="state-message">
+      Loading event details...
+    </div>
   } @else if (error()) {
-    <div class="state-message error-message">{{ error() }}</div>
+    <div class="state-message error-message">
+      {{ error() }}
+    </div>
   } @else if (event(); as current) {
 
     <div class="detail-header">
-      <span class="category-badge">{{ current.category_name }}</span>
+      <span class="category-badge">
+        {{ current.category_name }}
+      </span>
+
       <h1>{{ current.name }}</h1>
       <p>Hosted by {{ current.charity_name }}</p>
     </div>
 
     <div class="detail-layout">
       <div class="detail-main">
+
         <div class="info-card">
           <h2>About This Event</h2>
-          <p>{{ current.description }}</p>
+          <p>{{ current.description || 'No description available.' }}</p>
 
           <h3>Event Purpose</h3>
-          <p>{{ current.purpose }}</p>
+          <p>{{ current.purpose || 'No purpose specified.' }}</p>
         </div>
 
         <div class="info-card">
@@ -31,7 +39,9 @@
 
           <div class="info-row">
             <span>Date</span>
-            <strong>{{ current.event_date | date:'longDate' }}</strong>
+            <strong>
+              {{ current.event_date | date:'longDate' }}
+            </strong>
           </div>
 
           <div class="info-row">
@@ -41,7 +51,9 @@
 
           <div class="info-row">
             <span>Ticket Price</span>
-            <strong>{{ current.ticket_price | currency:'AUD' }}</strong>
+            <strong>
+              {{ current.ticket_price | currency:'AUD' }}
+            </strong>
           </div>
 
           <div class="info-row">
@@ -67,20 +79,65 @@
               ) {
                 <div class="registration-item">
                   <div>
-                    <strong>{{ registration.full_name }}</strong>
+                    <strong>
+                      {{ registration.full_name }}
+                    </strong>
                     <p>
                       {{ registration.registration_date | date:'medium' }}
                     </p>
                   </div>
-                  <span>{{ registration.tickets }} ticket(s)</span>
+
+                  <span>
+                    {{ registration.tickets }} ticket(s)
+                  </span>
                 </div>
               }
             </div>
           }
         </div>
+
       </div>
 
       <aside class="detail-sidebar">
+
+        <div class="info-card weather-card">
+          <h2>Event Weather</h2>
+
+          @if (weatherLoading()) {
+            <p class="muted">
+              Loading weather forecast...
+            </p>
+          } @else if (weather(); as forecast) {
+            <div class="weather-description">
+              {{ forecast.description }}
+            </div>
+
+            <div class="weather-temperatures">
+              <strong>
+                {{ forecast.temperatureMax }}&deg;C
+              </strong>
+
+              <span>
+                Low: {{ forecast.temperatureMin }}&deg;C
+              </span>
+            </div>
+
+            <p class="muted">
+              Chance of precipitation:
+              {{ forecast.precipitationProbability }}%
+            </p>
+          } @else if (weatherError()) {
+            <p class="muted">
+              Weather information is temporarily unavailable.
+            </p>
+          } @else {
+            <p class="muted">
+              Weather forecast is not yet available
+              for this event date.
+            </p>
+          }
+        </div>
+
         <div class="info-card">
           <h2>Fundraising Progress</h2>
 
@@ -89,23 +146,39 @@
           </div>
 
           <p class="muted">
-            Raised of {{ current.goal_amount | currency:'AUD' }} goal
+            Raised of
+            {{ current.goal_amount | currency:'AUD' }}
+            goal
           </p>
 
           <div class="progress-track">
-            <div class="progress-fill" [style.width.%]="progress()"></div>
+            <div
+              class="progress-fill"
+              [style.width.%]="progress()">
+            </div>
           </div>
 
           <p class="progress-text">
             {{ progress() | number:'1.0-0' }}% funded
           </p>
 
-          <a
-            [routerLink]="['/events', current.event_id, 'register']"
-            class="register-button">
-            Register for Event
-          </a>
+          @if (current.status === 'Active') {
+            <a
+              [routerLink]="[
+                '/events',
+                current.event_id,
+                'register'
+              ]"
+              class="register-button">
+              Register for Event
+            </a>
+          } @else {
+            <p class="muted">
+              Registration is closed for this event.
+            </p>
+          }
         </div>
+
       </aside>
     </div>
   }

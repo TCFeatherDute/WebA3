@@ -1,0 +1,160 @@
+
+.registration-page {
+  width: 100%;
+  color: #2b4434;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 28px;
+  color: #4d7d5d;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.page-heading {
+  margin-bottom: 32px;
+}
+
+.eyebrow {
+  color: #64866f;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.page-heading h1 {
+  margin: 12px 0;
+  font-size: 36px;
+}
+
+.page-heading p {
+  color: #748176;
+}
+
+.registration-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.form-card,
+.summary-card {
+  padding: 30px;
+  border: 1px solid #e5ede7;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.form-card h2,
+.summary-card h2 {
+  margin: 0 0 24px;
+  font-size: 21px;
+}
+
+.summary-card h3 {
+  margin: 0 0 16px;
+}
+
+.summary-card > p {
+  color: #748176;
+  line-height: 1.6;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.field label {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.field input {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid #dae5dd;
+  border-radius: 9px;
+  background: #fbfcfb;
+  color: #304b39;
+  font: inherit;
+}
+
+.field input:focus {
+  outline: 2px solid #b7d8bf;
+  border-color: #7eac8b;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 15px;
+  border: 0;
+  border-radius: 10px;
+  background: #507e5f;
+  color: white;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.submit-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 15px 0;
+  border-bottom: 1px solid #edf1ed;
+}
+
+.total-row {
+  color: #397a50;
+  font-size: 18px;
+}
+
+.form-error,
+.error-message {
+  color: #b34c4c;
+}
+
+.form-error {
+  padding: 12px;
+  border-radius: 8px;
+  background: #fff1f1;
+}
+
+.success-panel {
+  padding: 16px;
+  border-radius: 12px;
+  background: #eef7f0;
+  color: #376b49;
+}
+
+.success-panel a {
+  color: #326b46;
+  font-weight: 600;
+}
+
+.state-message {
+  padding: 28px;
+  background: #fff;
+  border-radius: 12px;
+}
+
+@media (max-width: 800px) {
+  .registration-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .form-card,
+  .summary-card {
+    padding: 22px;
+  }
+}
