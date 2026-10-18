@@ -1,0 +1,177 @@
+
+.detail-page {
+  width: 100%;
+  color: #2b4434;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 28px;
+  color: #4d7d5d;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.detail-header {
+  margin-bottom: 32px;
+}
+
+.category-badge {
+  display: inline-block;
+  padding: 7px 13px;
+  border-radius: 20px;
+  background: #e2f0e6;
+  color: #39724d;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.detail-header h1 {
+  margin: 16px 0 8px;
+  font-size: clamp(28px, 4vw, 40px);
+}
+
+.detail-header p,
+.muted {
+  color: #77867a;
+  line-height: 1.6;
+}
+
+.detail-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.detail-main {
+  display: grid;
+  gap: 24px;
+}
+
+.info-card {
+  padding: 28px;
+  background: #ffffff;
+  border: 1px solid #e5ede7;
+  border-radius: 16px;
+}
+
+.info-card h2 {
+  margin: 0 0 20px;
+  font-size: 21px;
+}
+
+.info-card h3 {
+  margin: 24px 0 10px;
+  font-size: 16px;
+}
+
+.info-card > p {
+  line-height: 1.7;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 14px 0;
+  border-bottom: 1px solid #edf1ed;
+}
+
+.info-row span {
+  color: #7b897e;
+}
+
+.info-row strong {
+  text-align: right;
+}
+
+.registration-list {
+  display: grid;
+  gap: 12px;
+}
+
+.registration-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid #edf1ed;
+  border-radius: 10px;
+}
+
+.registration-item p {
+  margin: 6px 0 0;
+  color: #7b897e;
+  font-size: 12px;
+}
+
+.registration-item > span {
+  white-space: nowrap;
+  color: #52785e;
+  font-size: 13px;
+}
+
+.amount {
+  color: #397a50;
+  font-size: 29px;
+  font-weight: 700;
+}
+
+.progress-track {
+  margin-top: 22px;
+  height: 9px;
+  overflow: hidden;
+  background: #e8f0e9;
+  border-radius: 10px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #77ae88;
+  border-radius: inherit;
+}
+
+.progress-text {
+  color: #61846c;
+  font-size: 13px;
+}
+
+.register-button {
+  display: block;
+  margin-top: 24px;
+  padding: 14px 18px;
+  border-radius: 10px;
+  background: #507e5f;
+  color: #ffffff;
+  text-decoration: none;
+  text-align: center;
+  font-weight: 700;
+}
+
+.register-button:hover {
+  background: #39694a;
+}
+
+.state-message {
+  padding: 36px;
+  background: #ffffff;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.error-message {
+  color: #b34c4c;
+}
+
+@media (max-width: 800px) {
+  .detail-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .info-card {
+    padding: 20px;
+  }
+}

@@ -1,0 +1,112 @@
+
+<section class="detail-page">
+  <a routerLink="/search" class="back-link">
+    &larr; Back to Events
+  </a>
+
+  @if (loading()) {
+    <div class="state-message">Loading event details...</div>
+  } @else if (error()) {
+    <div class="state-message error-message">{{ error() }}</div>
+  } @else if (event(); as current) {
+
+    <div class="detail-header">
+      <span class="category-badge">{{ current.category_name }}</span>
+      <h1>{{ current.name }}</h1>
+      <p>Hosted by {{ current.charity_name }}</p>
+    </div>
+
+    <div class="detail-layout">
+      <div class="detail-main">
+        <div class="info-card">
+          <h2>About This Event</h2>
+          <p>{{ current.description }}</p>
+
+          <h3>Event Purpose</h3>
+          <p>{{ current.purpose }}</p>
+        </div>
+
+        <div class="info-card">
+          <h2>Event Information</h2>
+
+          <div class="info-row">
+            <span>Date</span>
+            <strong>{{ current.event_date | date:'longDate' }}</strong>
+          </div>
+
+          <div class="info-row">
+            <span>Location</span>
+            <strong>{{ current.location }}</strong>
+          </div>
+
+          <div class="info-row">
+            <span>Ticket Price</span>
+            <strong>{{ current.ticket_price | currency:'AUD' }}</strong>
+          </div>
+
+          <div class="info-row">
+            <span>Status</span>
+            <strong>{{ current.status }}</strong>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <h2>Event Registrations</h2>
+
+          <p class="muted">
+            {{ current.registrations.length }} registrations
+          </p>
+
+          @if (current.registrations.length === 0) {
+            <p class="muted">No registrations yet.</p>
+          } @else {
+            <div class="registration-list">
+              @for (
+                registration of current.registrations;
+                track registration.registration_id
+              ) {
+                <div class="registration-item">
+                  <div>
+                    <strong>{{ registration.full_name }}</strong>
+                    <p>
+                      {{ registration.registration_date | date:'medium' }}
+                    </p>
+                  </div>
+                  <span>{{ registration.tickets }} ticket(s)</span>
+                </div>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <aside class="detail-sidebar">
+        <div class="info-card">
+          <h2>Fundraising Progress</h2>
+
+          <div class="amount">
+            {{ current.current_amount | currency:'AUD' }}
+          </div>
+
+          <p class="muted">
+            Raised of {{ current.goal_amount | currency:'AUD' }} goal
+          </p>
+
+          <div class="progress-track">
+            <div class="progress-fill" [style.width.%]="progress()"></div>
+          </div>
+
+          <p class="progress-text">
+            {{ progress() | number:'1.0-0' }}% funded
+          </p>
+
+          <a
+            [routerLink]="['/events', current.event_id, 'register']"
+            class="register-button">
+            Register for Event
+          </a>
+        </div>
+      </aside>
+    </div>
+  }
+</section>

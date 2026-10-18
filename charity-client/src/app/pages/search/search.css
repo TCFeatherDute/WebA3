@@ -1,0 +1,153 @@
+
+.search-page {
+  width: 100%;
+}
+
+.search-heading {
+  margin-bottom: 32px;
+}
+
+.eyebrow {
+  color: #64866f;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.search-heading h1 {
+  margin: 12px 0;
+  font-size: 36px;
+  color: #254a35;
+}
+
+.search-heading p {
+  color: #748176;
+  line-height: 1.7;
+}
+
+.search-panel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  padding: 28px;
+  background: #ffffff;
+  border: 1px solid #e5ede7;
+  border-radius: 18px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.field label {
+  color: #405c49;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid #dae5dd;
+  border-radius: 9px;
+  background: #fbfcfb;
+  color: #304b39;
+  font: inherit;
+}
+
+.field input:focus,
+.field select:focus {
+  outline: 2px solid #b7d8bf;
+  border-color: #7eac8b;
+}
+
+.search-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.search-button,
+.reset-button {
+  padding: 12px 22px;
+  border-radius: 9px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.search-button {
+  background: #527e60;
+  border: 1px solid #527e60;
+  color: #ffffff;
+}
+
+.reset-button {
+  background: #ffffff;
+  border: 1px solid #d5e2d8;
+  color: #527e60;
+}
+
+.results-section {
+  margin-top: 48px;
+}
+
+.results-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.results-heading h2 {
+  margin: 0;
+  color: #254a35;
+}
+
+.results-heading span {
+  color: #748176;
+  font-size: 14px;
+}
+
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.state-message {
+  padding: 30px;
+  background: white;
+  border-radius: 12px;
+  text-align: center;
+  color: #748176;
+}
+
+.error-message {
+  color: #b34c4c;
+}
+
+@media (max-width: 900px) {
+  .events-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .search-panel,
+  .events-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .search-actions {
+    flex-direction: column;
+  }
+
+  .search-heading h1 {
+    font-size: 28px;
+  }
+}
