@@ -1,43 +1,47 @@
 .site-header {
-  background-color: #162338;
-  color: white;
-  padding: 24px 32px;
+  background: #ffffff;
+  border-bottom: 1px solid #e6ece7;
 }
 
 .header-container {
-  max-width: 1200px;
+  max-width: 1240px;
   margin: 0 auto;
+  padding: 18px 24px;
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
 }
 
 .brand-icon {
-  font-size: 32px;
-  color: #a9d3be;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #e8f2ec;
+  color: #56866b;
+  font-size: 27px;
 }
 
 .brand-text h1 {
-  font-size: 24px;
-  font-weight: 600;
   margin: 0;
+  font-size: 21px;
+  color: #294435;
+  font-weight: 650;
 }
 
 .brand-text p {
-  font-size: 13px;
-  color: #bdc9d5;
-  margin: 4px 0 0;
+  margin: 2px 0 0;
+  color: #819187;
+  font-size: 12px;
 }
 
 @media (max-width: 640px) {
-  .site-header {
-    padding: 18px 16px;
-  }
-
-  .brand-text h1 {
-    font-size: 20px;
+  .header-container {
+    padding: 14px 16px;
   }
 }

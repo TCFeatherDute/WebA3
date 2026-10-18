@@ -1,44 +1,45 @@
 .site-navbar {
-  background-color: #253750;
-  border-bottom: 1px solid #334155;
+  background: #ffffff;
+  border-bottom: 1px solid #e6ece7;
 }
 
 .nav-container {
-  max-width: 1200px;
+  max-width: 1240px;
   margin: 0 auto;
+  padding: 8px 24px;
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 0 24px;
 }
 
 .nav-container a {
   display: inline-block;
-  padding: 14px 20px;
-  color: #d8e2ed;
+  padding: 10px 18px;
+  border-radius: 8px;
   text-decoration: none;
+  color: #627469;
   font-size: 14px;
-  transition: background-color 0.2s;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
 }
 
 .nav-container a:hover {
-  background-color: #334861;
-  color: white;
+  background: #f1f5f1;
+  color: #3e7053;
 }
 
 .nav-container a.active {
-  background-color: #a9d3be;
-  color: #162338;
+  background: #e8f2ec;
+  color: #3d7656;
   font-weight: 600;
 }
 
 @media (max-width: 640px) {
   .nav-container {
-    padding: 0 8px;
+    padding: 8px 12px;
   }
 
   .nav-container a {
-    padding: 12px;
-    font-size: 13px;
+    padding: 10px 12px;
   }
 }
