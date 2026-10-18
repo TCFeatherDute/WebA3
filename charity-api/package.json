@@ -1,14 +1,21 @@
 {
   "name": "charity-api",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "charity",
+    "express",
+    "mysql",
+    "rest-api"
+  ],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "RESTful API for the PROG2002 charity events website",
   "dependencies": {
     "cors": "^2.8.6",
     "dotenv": "^18.0.8",
