@@ -1,0 +1,25 @@
+.site-footer {
+  background: #ffffff;
+  border-top: 1px solid #e3eae5;
+  margin-top: 48px;
+}
+
+.footer-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 22px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  color: #8a998f;
+  font-size: 12px;
+}
+
+@media (max-width: 640px) {
+  .footer-container {
+    padding: 20px 16px;
+    flex-direction: column;
+    text-align: center;
+  }
+}

@@ -1,0 +1,19 @@
+<nav class="site-navbar" aria-label="Admin navigation">
+  <div class="nav-container">
+    <a routerLink="/events" routerLinkActive="active"
+       [routerLinkActiveOptions]="{ exact: true }">
+      All Events
+    </a>
+
+    <a routerLink="/events/new" routerLinkActive="active">
+      + New Event
+    </a>
+
+    <span class="nav-spacer" aria-hidden="true"></span>
+
+    <a class="external-link" href="http://localhost:4200" target="_blank"
+       rel="noopener noreferrer">
+      View Public Site ↗
+    </a>
+  </div>
+</nav>
