@@ -1,0 +1,54 @@
+
+<article class="event-card">
+  <div class="event-image">
+    @if (event().image) {
+      <img [src]="event().image" [alt]="event().name">
+    } @else {
+      <div class="image-placeholder">♥</div>
+    }
+
+    <span class="category-badge">
+      {{ event().category_name }}
+    </span>
+  </div>
+
+  <div class="event-content">
+    <h3>{{ event().name }}</h3>
+
+    <p class="event-location">
+      📍 {{ event().location }}
+    </p>
+
+    <p class="event-date">
+      📅 {{ event().event_date | date:'mediumDate' }}
+    </p>
+
+    <p class="event-charity">
+      Hosted by {{ event().charity_name }}
+    </p>
+
+    <div class="progress-section">
+      <div class="progress-label">
+        <span>Fundraising progress</span>
+        <strong>{{ progress | number:'1.0-0' }}%</strong>
+      </div>
+
+      <div class="progress-track">
+        <div
+          class="progress-fill"
+          [style.width.%]="progress">
+        </div>
+      </div>
+    </div>
+
+    <div class="event-footer">
+      <span class="ticket-price">
+        {{ event().ticket_price | currency:'AUD' }}
+      </span>
+
+      <a [routerLink]="['/events', event().event_id]">
+        View Details →
+      </a>
+    </div>
+  </div>
+</article>

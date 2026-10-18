@@ -1,3 +1,4 @@
+
 <section class="hero">
   <div class="hero-content">
     <span class="hero-label">MAKE A DIFFERENCE</span>
@@ -10,18 +11,44 @@
     </p>
 
     <a routerLink="/search" class="hero-button">
-      Explore Events →
+      Explore Events &rarr;
     </a>
+  </div>
+</section>
+
+<section class="home-stats">
+  <div class="stat-item">
+    <strong>{{ totalEvents() }}</strong>
+    <span>Charity Events</span>
+  </div>
+
+  <div class="stat-item">
+    <strong>{{ totalRaised().toFixed(2) }}</strong>
+    <span>AUD Raised</span>
   </div>
 </section>
 
 <section class="upcoming-events">
   <div class="section-heading">
     <h2>Upcoming Events</h2>
-    <a routerLink="/search">View all →</a>
+    <a routerLink="/search">View all &rarr;</a>
   </div>
 
   <p class="section-description">
     Discover exciting opportunities to support local charities.
   </p>
+
+  @if (loading()) {
+    <p class="state-message">Loading events...</p>
+  } @else if (error()) {
+    <p class="state-message error-message">{{ error() }}</p>
+  } @else if (events().length === 0) {
+    <p class="state-message">No active events are available.</p>
+  } @else {
+    <div class="events-grid">
+      @for (event of events(); track event.event_id) {
+        <app-event-card [event]="event"></app-event-card>
+      }
+    </div>
+  }
 </section>

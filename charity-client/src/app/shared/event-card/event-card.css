@@ -1,0 +1,119 @@
+
+.event-card {
+  background: #ffffff;
+  border: 1px solid #e7ece8;
+  border-radius: 16px;
+  overflow: hidden;
+  height: 100%;
+  box-shadow: 0 4px 16px rgba(29, 62, 44, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(29, 62, 44, 0.1);
+}
+
+.event-image {
+  position: relative;
+  height: 180px;
+  background: #e9f3ec;
+}
+
+.event-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-placeholder {
+  height: 100%;
+  display: grid;
+  place-items: center;
+  color: #83aa90;
+  font-size: 48px;
+}
+
+.category-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: #ffffffed;
+  color: #35654a;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.event-content {
+  padding: 20px;
+}
+
+.event-content h3 {
+  margin: 0 0 14px;
+  font-size: 19px;
+  color: #20372a;
+}
+
+.event-location,
+.event-date,
+.event-charity {
+  margin: 8px 0;
+  color: #718075;
+  font-size: 13px;
+}
+
+.progress-section {
+  margin-top: 22px;
+}
+
+.progress-label,
+.event-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.progress-label {
+  margin-bottom: 9px;
+  font-size: 12px;
+  color: #617467;
+}
+
+.progress-track {
+  height: 7px;
+  border-radius: 10px;
+  background: #eaf0eb;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #72a989;
+  border-radius: inherit;
+}
+
+.event-footer {
+  margin-top: 22px;
+  padding-top: 16px;
+  border-top: 1px solid #edf0ed;
+}
+
+.ticket-price {
+  font-size: 17px;
+  font-weight: 700;
+  color: #2b6041;
+}
+
+.event-footer a {
+  color: #397951;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.event-footer a:hover {
+  text-decoration: underline;
+}
