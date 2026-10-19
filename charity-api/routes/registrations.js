@@ -16,7 +16,7 @@
  */
 
 const express = require('express');
-const pool = require('../db');
+const pool = require('../event_db');
 
 /** Express router instance for /api/registrations. */
 const router = express.Router();

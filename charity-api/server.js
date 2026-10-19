@@ -11,7 +11,7 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 
-const pool = require('./db');
+const pool = require('./event_db');
 const eventRouter = require('./routes/events');
 const registrationRouter = require('./routes/registrations');
 const categoryRouter = require('./routes/categories');
