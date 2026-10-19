@@ -298,6 +298,11 @@ Core public-facing features have been implemented and tested locally.
 
 Final hosting deployment, administrative functionality verification and production testing are pending.
 
+
+## 13. AI Generator
+I acknowledge that I have used GenAI tools to complete this assessment. I used Doubao AI to generate the data in the database and the required images within the parameters outlined in the Assessment Brief and by the Unit Assessor.
+
+
 ---
 
 **Course:** PROG2002 – Web Development II  
