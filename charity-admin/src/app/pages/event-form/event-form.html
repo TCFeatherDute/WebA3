@@ -1,0 +1,293 @@
+<!-- Loading state -->
+@if (loading()) {
+  <div class="state-card">Loading event details…</div>
+}
+
+<!-- Load failure -->
+@else if (loadError()) {
+  <div class="state-card state-error">
+    <p>{{ loadError() }}</p>
+    <a class="btn btn-primary" routerLink="/events">Back to events</a>
+  </div>
+}
+
+<!-- Success confirmation -->
+@else if (saved()) {
+  <div class="state-card state-success">
+    <div class="success-icon" aria-hidden="true">✓</div>
+    <h3>{{ isEdit() ? 'Event updated successfully' : 'Event created successfully' }}</h3>
+    <p>The record has been saved to the database through the API.</p>
+    <div class="success-actions">
+      <a class="btn btn-primary" routerLink="/events">Back to all events</a>
+      @if (!isEdit()) {
+        <a class="btn btn-ghost" routerLink="/events/new">Create another event</a>
+      }
+    </div>
+  </div>
+}
+
+<!-- Form -->
+@else {
+  <div class="page-head">
+    <div>
+      <h2>{{ isEdit() ? 'Edit Event' : 'Create New Event' }}</h2>
+      <p class="page-sub">
+        @if (isEdit()) {
+          Updating event #{{ eventId() }}. Fields marked with
+          <span class="req">*</span> are required.
+        } @else {
+          Fill in the event details below. Fields marked with
+          <span class="req">*</span> are required.
+        }
+      </p>
+    </div>
+    <a class="btn btn-ghost" routerLink="/events">Cancel</a>
+  </div>
+
+  @if (submitError()) {
+    <div class="banner banner-error" role="alert">{{ submitError() }}</div>
+  }
+
+  <form #eventForm="ngForm" (ngSubmit)="onSubmit(eventForm)" novalidate>
+    <div class="form-card">
+      <h3 class="form-section">Basic information</h3>
+
+      <div class="field field-full">
+        <label for="name">Event name <span class="req">*</span></label>
+        <input
+          id="name" name="name" type="text"
+          [(ngModel)]="form.name" required maxlength="150"
+          placeholder="e.g. Sydney Charity Fun Run" />
+      </div>
+
+      <div class="field">
+        <label for="charity">Hosting charity <span class="req">*</span></label>
+        <select id="charity" name="charity_id"
+                [(ngModel)]="form.charity_id" required>
+          <option [ngValue]="''" disabled>— Select charity —</option>
+          @for (c of charities(); track c.charity_id) {
+            <option [ngValue]="c.charity_id">{{ c.charity_name }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="category">Category <span class="req">*</span></label>
+        <select id="category" name="category_id"
+                [(ngModel)]="form.category_id" required>
+          <option [ngValue]="''" disabled>— Select category —</option>
+          @for (cat of categories(); track cat.category_id) {
+            <option [ngValue]="cat.category_id">{{ cat.category_name }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="event_date">Event date <span class="req">*</span></label>
+        <input id="event_date" name="event_date" type="date"
+               [(ngModel)]="form.event_date" required />
+      </div>
+
+      <div class="field">
+        <label for="status">Status</label>
+        <select id="status" name="status" [(ngModel)]="form.status">
+          @for (s of statuses; track s) {
+            <option [ngValue]="s">{{ s }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="field field-full">
+        <label for="location">Location <span class="req">*</span></label>
+        <input
+          id="location" name="location" type="text"
+          [(ngModel)]="form.location" required maxlength="200"
+          placeholder="e.g. Centennial Park, Sydney" />
+      </div>
+
+      <div class="field field-full">
+        <label for="description">Description</label>
+        <textarea
+          id="description" name="description" rows="3"
+          [(ngModel)]="form.description" maxlength="2000"
+          placeholder="Describe what happens at the event."></textarea>
+      </div>
+
+      <div class="field field-full">
+        <label for="purpose">Fundraising purpose</label>
+        <textarea
+          id="purpose" name="purpose" rows="2"
+          [(ngModel)]="form.purpose" maxlength="1000"
+          placeholder="What will the raised funds be used for?"></textarea>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <h3 class="form-section">Financials</h3>
+
+      <div class="field">
+        <label for="ticket_price">Ticket price (AUD) <span class="req">*</span></label>
+        <input id="ticket_price" name="ticket_price" type="number"
+               [(ngModel)]="form.ticket_price" required min="0" step="0.01" />
+      </div>
+
+      <div class="field">
+        <label for="goal_amount">Fundraising goal (AUD)</label>
+        <input id="goal_amount" name="goal_amount" type="number"
+               [(ngModel)]="form.goal_amount" min="0" step="0.01"
+               placeholder="Optional" />
+      </div>
+
+      <div class="field">
+        <label for="current_amount">Amount raised so far (AUD)</label>
+        <input id="current_amount" name="current_amount" type="number"
+               [(ngModel)]="form.current_amount" min="0" step="0.01"
+               placeholder="Optional" />
+      </div>
+    </div>
+
+    <div class="form-card">
+      <h3 class="form-section">Image &amp; location coordinates</h3>
+
+      <div class="field field-full">
+        <label for="image">Image path</label>
+        <input id="image" name="image" type="text"
+               [(ngModel)]="form.image" maxlength="500" list="image-options"
+               placeholder="/images/funrun.jpg" />
+        <datalist id="image-options">
+          @for (img of imageSuggestions; track img) {
+            <option [value]="img"></option>
+          }
+        </datalist>
+      </div>
+
+      <div class="field field-full">
+        <p class="muted-note">
+          Coordinates power the event-day weather forecast (Open-Meteo).
+          Central Sydney is pre-filled so the forecast always works;
+          adjust them to the exact venue if you know it.
+        </p>
+      </div>
+
+      <div class="field">
+        <label for="latitude">Latitude</label>
+        <input id="latitude" name="latitude" type="number"
+               [(ngModel)]="form.latitude" min="-90" max="90" step="0.0000001"
+               placeholder="e.g. -33.8879" />
+      </div>
+
+      <div class="field">
+        <label for="longitude">Longitude</label>
+        <input id="longitude" name="longitude" type="number"
+               [(ngModel)]="form.longitude" min="-180" max="180" step="0.0000001"
+               placeholder="e.g. 151.2306" />
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary" [disabled]="submitting()">
+        {{ submitting() ? 'Saving…' : (isEdit() ? 'Save changes' : 'Create event') }}
+      </button>
+      <a class="btn btn-ghost" routerLink="/events">Back to events</a>
+    </div>
+  </form>
+
+  <!-- Associated registrations (edit mode only) -->
+  @if (isEdit()) {
+    <div class="registrations-card">
+      <h3 class="form-section">
+        Registrations for this event
+        <span class="reg-count">{{ event()?.registrations?.length ?? 0 }}</span>
+      </h3>
+
+      @if (registrationError()) {
+        <div class="banner banner-error" role="alert">{{ registrationError() }}</div>
+      }
+
+      @if ((event()?.registrations?.length ?? 0) === 0) {
+        <p class="muted-note">No registrations have been recorded yet.</p>
+      } @else {
+        <div class="table-wrap">
+          <table class="reg-table">
+            <thead>
+              <tr>
+                <th>Registered on</th>
+                <th>Attendee</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th class="num">Tickets</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (r of event()?.registrations; track r.registration_id) {
+                <tr [class.row-editing]="editingRegistrationId() === r.registration_id">
+                  <td>{{ r.registration_date | date: 'medium' }}</td>
+                  <td>{{ r.full_name }}</td>
+                  <td>{{ r.email }}</td>
+                  <td>{{ r.phone }}</td>
+                  <td class="num">{{ r.tickets }}</td>
+                  <td class="row-actions">
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-ghost"
+                      [disabled]="savingRegistration() || deletingRegistrationId() !== null"
+                      (click)="startEditRegistration(r)">
+                      Edit
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-danger"
+                      [disabled]="savingRegistration() || deletingRegistrationId() === r.registration_id"
+                      (click)="deleteRegistration(r)">
+                      {{ deletingRegistrationId() === r.registration_id ? 'Deleting…' : 'Delete' }}
+                    </button>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+
+      <!-- Inline registration editor -->
+      @if (editingRegistrationId() !== null) {
+        <div class="reg-edit-card">
+          <h4 class="reg-edit-title">Edit registration #{{ editingRegistrationId() }}</h4>
+          <form #regForm="ngForm" (ngSubmit)="saveRegistration(regForm)" novalidate>
+            <div class="reg-edit-grid">
+              <div class="field">
+                <label for="reg-name">Attendee name <span class="req">*</span></label>
+                <input id="reg-name" name="reg_full_name" type="text"
+                       [(ngModel)]="registrationForm.full_name" required maxlength="150" />
+              </div>
+              <div class="field">
+                <label for="reg-email">Email <span class="req">*</span></label>
+                <input id="reg-email" name="reg_email" type="email"
+                       [(ngModel)]="registrationForm.email" required maxlength="150" />
+              </div>
+              <div class="field">
+                <label for="reg-phone">Phone <span class="req">*</span></label>
+                <input id="reg-phone" name="reg_phone" type="text"
+                       [(ngModel)]="registrationForm.phone" required maxlength="30" />
+              </div>
+              <div class="field">
+                <label for="reg-tickets">Tickets <span class="req">*</span></label>
+                <input id="reg-tickets" name="reg_tickets" type="number"
+                       min="1" step="1"
+                       [(ngModel)]="registrationForm.tickets" required />
+              </div>
+            </div>
+            <div class="reg-edit-actions">
+              <button type="submit" class="btn btn-primary" [disabled]="savingRegistration()">
+                {{ savingRegistration() ? 'Saving…' : 'Save registration' }}
+              </button>
+              <button type="button" class="btn btn-ghost" [disabled]="savingRegistration()"
+                      (click)="cancelEditRegistration()">Cancel</button>
+            </div>
+          </form>
+        </div>
+      }
+    </div>
+  }
+}
